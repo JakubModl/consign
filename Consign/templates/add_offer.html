@@ -1,49 +1,74 @@
 
-<form method="POST">
-    <label for="model">Model:</label>
-    <select name="model" id="model" required>
-        <option value="" disabled selected>Vyber model...</option>
-        {% for model in models_sizes.keys() %}
-            <option value="{{ model }}">{{ model }}</option>
-        {% endfor %}
-    </select>
+<!DOCTYPE html>
+<html lang="cs">
 
-    <label for="size">Velikost:</label>
-    <input type="text" name="size" required>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Přidat nabídku</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
 
-    <label for="price">Cena (Kč):</label>
-    <input type="number" name="price" required>
+<body>
+    <div class="container">
+        <h1>Přidat nabídku</h1>
+        <form method="POST" class="offer-form">
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <select name="model" id="model" required class="form-control">
+                    <option value="" disabled selected>Vyber model...</option>
+                    {% for model in models_sizes.keys() %}
+                        <option value="{{ model }}">{{ model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-    <label for="partner">Partner:</label>
-    <select name="partner" required>
-        {% for partner in partners %}
-            <option value="{{ partner.name }}">{{ partner.name }}</option>
-        {% endfor %}
-    </select>
+            <div class="form-group">
+                <label for="size">Velikost:</label>
+                <input type="text" name="size" required class="form-control">
+            </div>
 
-    <button type="submit">Přidat nabídku</button>
-</form>
+            <div class="form-group">
+                <label for="price">Cena (Kč):</label>
+                <input type="number" name="price" required class="form-control">
+            </div>
 
-<script>
-    // Povolit vyhledávání v select boxu
-    document.addEventListener('DOMContentLoaded', () => {
-        const select = document.getElementById('model');
-        const searchBox = document.createElement('input');
-        searchBox.setAttribute('type', 'text');
-        searchBox.setAttribute('placeholder', 'Hledat model...');
-        searchBox.style.marginBottom = '5px';
+            <div class="form-group">
+                <label for="partner">Partner:</label>
+                <select name="partner" required class="form-control">
+                    {% for partner in partners %}
+                        <option value="{{ partner.name }}">{{ partner.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        select.parentNode.insertBefore(searchBox, select);
+            <button type="submit" class="btn btn-primary">Přidat nabídku</button>
+        </form>
 
-        searchBox.addEventListener('input', () => {
-            const searchTerm = searchBox.value.toLowerCase();
-            for (const option of select.options) {
-                if (option.value.toLowerCase().includes(searchTerm)) {
-                    option.style.display = '';
-                } else {
-                    option.style.display = 'none';
-                }
-            }
-        });
-    });
-</script>
+        <script>
+            // Povolit vyhledávání v select boxu
+            document.addEventListener('DOMContentLoaded', () => {
+                const select = document.getElementById('model');
+                const searchBox = document.createElement('input');
+                searchBox.setAttribute('type', 'text');
+                searchBox.setAttribute('placeholder', 'Hledat model...');
+                searchBox.style.marginBottom = '5px';
+
+                select.parentNode.insertBefore(searchBox, select);
+
+                searchBox.addEventListener('input', () => {
+                    const searchTerm = searchBox.value.toLowerCase();
+                    for (const option of select.options) {
+                        if (option.value.toLowerCase().includes(searchTerm)) {
+                            option.style.display = '';
+                        } else {
+                            option.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        </script>
+    </div>
+</body>
+
+</html>
