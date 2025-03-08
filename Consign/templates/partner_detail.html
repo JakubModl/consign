@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detail partnera | Sneakersnow.cz</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h2 {
+            color: #e60000;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .sold {
+            color: green;
+            font-weight: bold;
+        }
+        button {
+            background-color: #e60000;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        .status-available {
+            color: blue;
+            font-weight: bold;
+        }
+        .status-sold {
+            color: green;
+            font-weight: bold;
+        }
+        .status-paid {
+            color: #ff9800;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Údaje partnera</h2>
+    <p><strong>Jméno:</strong> {{ partner.name }}</p>
+    <p><strong>Email:</strong> {{ partner.email }}</p>
+    <p><strong>Telefon:</strong> {{ partner.phone }}</p>
+    <p><strong>Číslo účtu:</strong> {{ partner.bank_account }}</p>
+    <p><strong>Adresa:</strong> {{ partner.address }}</p>
+</div>
+
+<div class="container">
+    <h2>Dostupné nabídky</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Velikost</th>
+                <th>Cena (Kč)</th>
+                <th>Status</th>
+                <th>Akce</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for offer in offers if not offer.sold %}
+            <tr>
+                <td>{{ offer.model }}</td>
+                <td>{{ offer.size }}</td>
+                <td>{{ offer.price }}</td>
+                <td class="status-available">Dostupné</td>
+                <td>
+                    <a href="{{ url_for('mark_sold', id=offer.id) }}">Označit jako prodané</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Prodáno</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Velikost</th>
+                <th>Cena (Kč)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for offer in offers if offer.sold and not offer.paid %}
+            <tr>
+                <td>{{ offer.model }}</td>
+                <td>{{ offer.size }}</td>
+                <td>{{ offer.price }}</td>
+                <td class="status-sold">Prodáno</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="container">
+    <h2>Vyplaceno</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Velikost</th>
+                <th>Cena (Kč)</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for offer in offers if offer.sold and offer.paid %}
+            <tr>
+                <td>{{ offer.model }}</td>
+                <td>{{ offer.size }}</td>
+                <td>{{ offer.price }}</td>
+                <td class="status-paid">Vyplaceno</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

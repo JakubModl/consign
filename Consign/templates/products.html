@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Produkty</title>
+</head>
+<body>
+    <h1>Seznam produktů</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Název</th>
+            <th>Velikost</th>
+            <th>Cena</th>
+            <th>Obrázek</th>
+            <th>Výrobce</th>
+        </tr>
+        {% for product in products %}
+        <tr>
+            <td>{{ product.product_id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.size }}</td>
+            <td>{{ product.price_vat }} Kč</td>
+            <td>
+                {% if product.image_url %}
+                    <img src="{{ product.image_url }}" alt="{{ product.name }}" width="50">
+                {% endif %}
+            </td>
+            <td>{{ product.manufacturer }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+

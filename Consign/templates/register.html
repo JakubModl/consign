@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrace partnera | Sneakersnow.cz</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            color: #e60000;
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="password"], button {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #e60000;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+        a {
+            display: block;
+            margin-top: 15px;
+            color: #e60000;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Registrace partnera</h2>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Jméno" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="phone" placeholder="Telefon" required>
+        <input type="text" name="bank_account" placeholder="Číslo účtu" required>
+        <input type="text" name="address" placeholder="Adresa" required>
+        <input type="password" name="password" placeholder="Heslo" required>
+        <button type="submit">Registrovat se</button>
+    </form>
+    <a href="{{ url_for('login') }}">Už máš účet? Přihlaš se zde</a>
+</div>
+
+</body>
+</html>

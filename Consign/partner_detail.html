@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Nabídky od {{ partner.name }}</title>
+</head>
+<body>
+    <h2>Nabídky od {{ partner.name }}</h2>
+    <ul>
+        {% for offer in offers %}
+            <li>
+                {{ offer.model }} – Velikost: {{ offer.size }} – Cena: {{ offer.price }} Kč – {{ 'Prodáno' if offer.sold else 'Dostupné' }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('partners_list') }}">Zpět na seznam partnerů</a>
+</body>
+</html>

@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upravit nabídku</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 30px;
+            max-width: 600px;
+        }
+        h2 {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #dc3545;
+            border-color: #dc3545;
+            transition: 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #bb2d3b;
+            border-color: #bb2d3b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Upravit nabídku</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="model">Model:</label>
+            <input type="text" class="form-control" id="model" name="model" value="{{ offer.model }}" required>
+        </div>
+        <div class="form-group">
+            <label for="size">Velikost:</label>
+            <input type="text" class="form-control" id="size" name="size" value="{{ offer.size }}" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Cena (Kč):</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ offer.price }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Uložit změny</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Zpět</a>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

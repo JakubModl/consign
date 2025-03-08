@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Seznam partnerů</title>
+</head>
+<body>
+    <h2>Seznam partnerů</h2>
+    <ul>
+        {% for partner in partners %}
+            <li>
+                <a href="{{ url_for('partner_detail', name=partner.name) }}">{{ partner.name }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Zpět na hlavní stránku</a>
+</body>
+</html>

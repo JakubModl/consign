@@ -1,0 +1,49 @@
+
+<form method="POST">
+    <label for="model">Model:</label>
+    <select name="model" id="model" required>
+        <option value="" disabled selected>Vyber model...</option>
+        {% for model in models_sizes.keys() %}
+            <option value="{{ model }}">{{ model }}</option>
+        {% endfor %}
+    </select>
+
+    <label for="size">Velikost:</label>
+    <input type="text" name="size" required>
+
+    <label for="price">Cena (Kč):</label>
+    <input type="number" name="price" required>
+
+    <label for="partner">Partner:</label>
+    <select name="partner" required>
+        {% for partner in partners %}
+            <option value="{{ partner.name }}">{{ partner.name }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Přidat nabídku</button>
+</form>
+
+<script>
+    // Povolit vyhledávání v select boxu
+    document.addEventListener('DOMContentLoaded', () => {
+        const select = document.getElementById('model');
+        const searchBox = document.createElement('input');
+        searchBox.setAttribute('type', 'text');
+        searchBox.setAttribute('placeholder', 'Hledat model...');
+        searchBox.style.marginBottom = '5px';
+
+        select.parentNode.insertBefore(searchBox, select);
+
+        searchBox.addEventListener('input', () => {
+            const searchTerm = searchBox.value.toLowerCase();
+            for (const option of select.options) {
+                if (option.value.toLowerCase().includes(searchTerm)) {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+        });
+    });
+</script>
